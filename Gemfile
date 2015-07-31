@@ -7,7 +7,7 @@ gem 'bootstrap-sass', '3.2.0.0'
 gem 'bcrypt', '~> 3.1.10'
 gem 'faker',			'1.4.2'
 gem 'will_paginate', '~> 3.0'
-gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap'
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets
