@@ -1,6 +1,7 @@
 example:
   name: Example User
   email: example@example.com
+  admin: true
   password_digest: <%= User.digest('something') %>
 
 archer:
@@ -20,6 +21,7 @@ mallory:
 
 <% 30.times do |n| %>
 user_<%= n %>:
+  id: <%= n %>
   name:  <%= "User #{n}" %>
   email: <%= "user-#{n}@example.com" %>
   password_digest: <%= User.digest('password') %>
