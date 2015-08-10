@@ -2,9 +2,12 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.2'
+gem 'rails', '4.2.3'
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'bcrypt', '~> 3.1.10'
+gem 'faker',			'1.4.2'
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets
@@ -54,6 +57,7 @@ end
 group :production do
 	gem 'pg', 						'0.17.1'
 	gem 'rails_12factor', '0.0.2'
+	gem 'puma', 					'2.11.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
