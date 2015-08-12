@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 	attr_accessor :remember_token
+
+  has_secure_password
+  has_many :microposts, dependent: :destroy
+
 	before_save { email.downcase! }
 	VALID_EMAIL_REGEX = /[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+/i
 	validates :name, presence: true, length: { maximum: 50 }
@@ -7,8 +11,6 @@ class User < ActiveRecord::Base
 							format: { with: VALID_EMAIL_REGEX },
 							uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-
-	has_secure_password
 
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -32,5 +34,9 @@ class User < ActiveRecord::Base
   def authenticated?(remember_token)
   	return false if remember_digest.nil?
   	BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 end
