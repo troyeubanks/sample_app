@@ -35,4 +35,8 @@ class User < ActiveRecord::Base
   	return false if remember_digest.nil?
   	BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
+
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
 end
