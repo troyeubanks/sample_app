@@ -69,7 +69,7 @@ class UserTest < ActiveSupport::TestCase
 	end
 
 	test "email addresses should be saved as downcase" do
-		mixed_case_email = "NotDoWnCASE@examPLE.coM"
+		mixed_case_email = "NotDoWnCASE@example.coM"
 		@user.email = mixed_case_email
 		@user.save
 		assert_equal mixed_case_email.downcase, @user.reload.email
@@ -85,5 +85,16 @@ class UserTest < ActiveSupport::TestCase
 		assert_difference "Micropost.count", -1 do
 			@user.destroy
 		end
+	end
+
+	test "should follow and unfollow a user" do
+		example = users(:example)
+		archer  = users(:archer)
+		assert_not example.following?(archer)
+		example.follow(archer)
+		assert example.following?(archer)
+		assert archer.followers.include?(example)
+		example.unfollow(archer)
+		assert_not example.following?(archer)
 	end
 end
